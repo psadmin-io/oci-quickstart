@@ -32,7 +32,7 @@ resource "oci_identity_policy" "sandbox_policy" {
   name = "${var.oci_name}"
   statements = "${var.policy_statements}"
 
-  depends_on = ""
+  depends_on = ["oci_identity_group.sandbox_group"]
 }
 
 resource "oci_identity_user" "sandbox_user" {
