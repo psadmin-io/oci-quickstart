@@ -1,4 +1,3 @@
-# Networking
 resource "oci_core_vcn" "sandbox_vcn" {
   cidr_block = "${var.vcn_cidr_block}"
   display_name = "Sandbox Network"
@@ -39,7 +38,7 @@ resource "oci_core_dhcp_options" "sandbox_dhcp_options" {
     vcn_id = "${oci_core_vcn.sandbox_vcn.id}"
 }
 
-resource "oci_core_subnet" "sandbox-subnet" {
+resource "oci_core_subnet" "sandbox_subnet" {
   count               = 3
   // availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[count.index],"name")}"
   availability_domain = "${var.availability_domain}"
@@ -55,3 +54,7 @@ resource "oci_core_subnet" "sandbox-subnet" {
   route_table_id      = "${oci_core_route_table.sandbox_route_table.id}"
   dhcp_options_id     = "${oci_core_dhcp_options.sandbox_dhcp_options.id}"
 }
+
+// output "sandbox_subnets" {
+//   value = "${oci_core_subnet.sandbox_subnet.*.id}"
+// }
