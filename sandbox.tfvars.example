@@ -1,0 +1,19 @@
+tenancy_ocid = ""
+user_ocid = ""
+fingerprint = "xx:xx:xx"
+private_key_path = "~/.oci/oci_api_key.pem"
+region = "us-ashburn-1"
+
+oci_name = "sandbox"
+
+compartment_description = "Playground for OCI Instances"
+group_description = "Sandbox Users"
+policy_description = "Sandbox Access for Users"
+policy_statements = ["Allow group sandbox to manage all-resources in compartment sandbox"]
+
+user_description = "Sandbox User"
+api_key_key_value = <<EOF
+-----BEGIN PUBLIC KEY-----
+-----END PUBLIC KEY-----
+EOF
+
