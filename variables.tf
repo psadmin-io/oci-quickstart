@@ -21,7 +21,7 @@ variable "region"{
 
 variable "availability_domain" {
   description = "Availablility Domain for the Region"
-  default = "IAD-AD-1"
+  default = "pbfo:US-ASHBURN-AD-1"
 }
 
 variable "oci_name" {
@@ -61,9 +61,12 @@ variable "http_port" {
 
 variable "vcn_cidr_block" {
   description = "IP range for Subnet"
-  default = "10.0.0.0/24"
+  default = "10.0.0.0/16"
 }
 
+variable "domain" {
+  description = "Domain Name"
+}
 // variable "subnet_security_list_ids" {
 //   description = "Default security lists for subnet"
 // }
