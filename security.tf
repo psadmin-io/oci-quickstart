@@ -1,6 +1,8 @@
 
 resource "oci_core_security_list" "sandbox_security_list" {
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
+  display_name = "Sandbox Default Security List"
+
   egress_security_rules = [
     {
       protocol    = "6"
@@ -52,7 +54,8 @@ resource "oci_core_security_list" "sandbox_security_list" {
 # Primary Subnet - NFS
 resource "oci_core_security_list" "sandbox_nfs_security_list" {
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-
+  display_name = "Sandbox NFS Security List"
+  
   ingress_security_rules = [
     {
       protocol = "6"
@@ -167,7 +170,8 @@ resource "oci_core_security_list" "sandbox_nfs_security_list" {
 # Second Subnet - Midtier
 resource "oci_core_security_list" "sandbox_midtier_security_list" {
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-
+  display_name = "Sandbox Midtier Security List"
+  
   ingress_security_rules = [
     {
       protocol = "6"
@@ -242,7 +246,8 @@ resource "oci_core_security_list" "sandbox_midtier_security_list" {
 # Third Subnet - Database
 resource "oci_core_security_list" "sandbox_db_security_list" {
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-
+  display_name = "Sandbox DB Security List"
+  
   ingress_security_rules = [
     {
       protocol = "6"
