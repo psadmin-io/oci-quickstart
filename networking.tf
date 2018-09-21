@@ -41,7 +41,8 @@ resource "oci_core_dhcp_options" "sandbox_dhcp_options" {
 resource "oci_core_subnet" "sandbox_subnet" {
   count               = 3
   // availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[count.index],"name")}"
-  availability_domain = "${var.availability_domain}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[1],"name")}"
+  // availability_domain = "${var.availability_domain}"
   cidr_block          = "10.0.${count.index}.0/24"
   display_name        = "${oci_core_vcn.sandbox_vcn.display_name} Subnet ${count.index}"
   // dns_label           = "subnet${count.index}sandbox"
