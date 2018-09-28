@@ -5,6 +5,8 @@ private_key_path = "~/.oci/oci_api_key.pem"
 region = "us-ashburn-1"
 
 oci_name = "sandbox"
+# Less than 15 characters
+dns_label = "sandbox" 
 
 compartment_description = "Playground for OCI Instances"
 group_description = "Sandbox Users"

@@ -64,9 +64,12 @@ variable "vcn_cidr_block" {
   default = "10.0.0.0/16"
 }
 
-variable "domain" {
-  description = "Domain Name"
+variable "dns_label" {
+  description = "Domain Name Label to use with oraclevcn.com"
+  type = "list"
+  default = ["main","midtier","db"]
 }
+
 // variable "subnet_security_list_ids" {
 //   description = "Default security lists for subnet"
 // }
