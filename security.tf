@@ -161,6 +161,30 @@ resource "oci_core_security_list" "sandbox_nfs_security_list" {
         min = "32803"
         max = "32803"
       }
+    },{
+      protocol = "6"
+      source   = "10.0.0.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
+      }
+    },{
+      protocol = "6"
+      source   = "10.0.1.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
+      }
+    },{
+      protocol = "6"
+      source   = "10.0.2.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
+      }
     }
   ]
   vcn_id = "${oci_core_vcn.sandbox_vcn.id}"

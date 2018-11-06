@@ -50,3 +50,7 @@ resource "oci_identity_api_key" "sandbox_api_key" {
   key_value = "${var.api_key_key_value}"
   user_id = "${oci_identity_user.sandbox_user.id}"
 }
+
+output "availability_domains" {
+  value = "${data.oci_identity_availability_domains.primary_availability_domains.availability_domains}"
+}
