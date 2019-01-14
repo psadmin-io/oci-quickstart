@@ -6,6 +6,6 @@ resource "oci_objectstorage_bucket" "sandbox_bucket" {
   namespace = "${data.oci_objectstorage_namespace.ns.namespace}"
 }
 
-output namespace {
-  value = "${data.oci_objectstorage_namespace.ns.namespace}"
-}
+// output namespace {
+//   value = "${data.oci_objectstorage_namespace.ns.namespace}"
+// }

@@ -14,15 +14,20 @@ variable "private_key_path" {
   description = "Private Key Path"
 }
 
+variable "shape" {
+  description = "Sizing for the VM"
+  default     = "VM.Standard1.1"
+}
+
 variable "region"{
   default = "us-ashburn-1"
   description = "OCI Region"
 }
 
-variable "availability_domain" {
-  description = "Availablility Domain for the Region"
-  default = "pbfo:US-ASHBURN-AD-1"
-}
+// variable "availability_domain" {
+//   description = "Availablility Domain for the Region"
+//   default = "pbfo:US-ASHBURN-AD-1"
+// }
 
 variable "oci_name" {
   description = "Common name to use for OCI components"
@@ -47,6 +52,10 @@ variable "policy_statements" {
 
 variable "user_description" {
   description = "OCI User Description"
+}
+
+variable "ssh_public_key"{
+  description = "SSH Public Key value"
 }
 
 variable "api_key_key_value" {
