@@ -3,7 +3,8 @@ resource "oci_core_vcn" "sandbox_vcn" {
   display_name = "Sandbox Network"
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
   // default_route_table_id = "${oci_core_route_table.sandbox_route_table.id}"
-  // dns_label = "${element(var.dns_label, 0)}"
+  dns_label = "${var.vcn_label}"
+  # dns_label = "psft"
 }
 
 resource "oci_core_internet_gateway" "sandbox_internet_gateway" {
@@ -41,10 +42,10 @@ resource "oci_core_dhcp_options" "sandbox_dhcp_options" {
         server_type = "VcnLocalPlusInternet"
     }
 
-    // options {
-    //     type = "SearchDomain"
-    //     search_domain_names = [ ".oraclevcn.com" ]
-    // }
+    options {
+        type = "SearchDomain"
+        search_domain_names = [ "${var.vcn_label}.oraclevcn.com" ]
+    }
 
     vcn_id = "${oci_core_vcn.sandbox_vcn.id}"
 }
@@ -52,9 +53,9 @@ resource "oci_core_dhcp_options" "sandbox_dhcp_options" {
 resource "oci_core_subnet" "sandbox_subnet" {
   count               = 3
   // availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[count.index],"name")}"
-  availability_domain = "${data.oci_identity_availability_domains.primary_availability_domains.availability_domains[0]}"
+  # availability_domain = "${data.oci_identity_availability_domains.primary_availability_domains.availability_domains[0]}"
   cidr_block          = "10.0.${count.index}.0/24"
-  display_name        = "${oci_core_vcn.sandbox_vcn.display_name} Subnet ${count.index}"
+  display_name        = "${oci_core_vcn.sandbox_vcn.display_name} Subnet - ${element(var.dns_label, count.index)}"
   dns_label           = "${element(var.dns_label, count.index)}"
   security_list_ids   = [
     "${oci_core_security_list.sandbox_security_list.id}",
@@ -66,12 +67,12 @@ resource "oci_core_subnet" "sandbox_subnet" {
   route_table_id      = "${oci_core_route_table.sandbox_route_table.id}"
   dhcp_options_id     = "${oci_core_dhcp_options.sandbox_dhcp_options.id}"
 
-  // depends_on = ["oci_core_vcn.sandbox_vcn"]
+  depends_on = ["oci_core_vcn.sandbox_vcn"]
 }
 
-// output "sandbox_subnets" {
-//   value = "${oci_core_subnet.sandbox_subnet.*.id}"
-// }
+output "sandbox_subnets" {
+  value = "${oci_core_subnet.sandbox_subnet.*.id}"
+}
 
 // output "sandbox_default_route_table" {
 //   value  = "${data.oci_core_route_tables.sandbox_default_route_table.id}"

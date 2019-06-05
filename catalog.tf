@@ -1,7 +1,8 @@
 data "oci_core_app_catalog_listings" "cm_app_catalog_listings" {
   filter {
     name   = "display_name"
-    values = ["PeopleSoft Cloud Manager Image - OCI"]
+    # values = ["PeopleSoft Cloud Manager Image - OCI"]
+    values = ["PeopleSoft Cloud Manager Image for OCI"]
   }
 }
 
@@ -49,14 +50,36 @@ resource "oci_core_app_catalog_subscription" "cm_app_catalog_subscription" {
 //   }
 // }
 
-// output "subscriptions" {
-//   value = ["${data.oci_core_app_catalog_subscriptions.cm_app_catalog_subscriptions.app_catalog_subscriptions}"]
-// }
+# output subscriptions {
+#   value = ["${data.oci_core_app_catalog_subscriptions.cm_app_catalog_subscriptions.app_catalog_subscriptions}"]
+# }
 
-// output agreement_eula_link {
-//   value = ["${oci_core_app_catalog_listing_resource_version_agreement.cm_app_catalog_listing_resource_version_agreement.eula_link}"]
-// }
+# output agreement_eula_link {
+#   value = ["${oci_core_app_catalog_listing_resource_version_agreement.cm_app_catalog_listing_resource_version_agreement.eula_link}"]
+# }
 
-// output catalog_listing {
-//    value = "${data.oci_core_app_catalog_listings.cm_app_catalog_listings.app_catalog_listings}"
-// }
+# output catalog_listing {
+#    value = "${data.oci_core_app_catalog_listings.cm_app_catalog_listings.app_catalog_listings}"
+# }
+
+data "oci_core_app_catalog_listings" "cm_linux_image_listings" {
+  filter {
+    name = "display_name"
+    values = ["Oracle Linux Image customized for PeopleSoft Cloud Manager on OCI"]
+  }
+}
+
+data "oci_core_app_catalog_listing_resource_versions" "cm_linux_catalog_listing_resource_versions" {
+  #Required
+  listing_id = "${lookup(data.oci_core_app_catalog_listings.cm_linux_image_listings.app_catalog_listings[0],"listing_id")}"
+}
+
+data "oci_core_app_catalog_listing_resource_version" "cm_linux_catalog_listing_resource_version" {
+  #Required
+  listing_id               = "${lookup(data.oci_core_app_catalog_listings.cm_linux_image_listings.app_catalog_listings[0],"listing_id")}"
+  resource_version = "${lookup(data.oci_core_app_catalog_listing_resource_versions.cm_linux_catalog_listing_resource_versions.app_catalog_listing_resource_versions[0],"listing_resource_version")}"
+}
+
+output cm_linux_image_ocid {
+  value = "${data.oci_core_app_catalog_listing_resource_version.cm_linux_catalog_listing_resource_version.listing_id}"
+}

@@ -73,10 +73,15 @@ variable "vcn_cidr_block" {
   default = "10.0.0.0/16"
 }
 
+variable "vcn_label" {
+  description = "DNS Label for the VCN"
+  default = "psft"
+}
+
 variable "dns_label" {
   description = "Domain Name Label to use with oraclevcn.com"
   type = "list"
-  default = ["main","midtier","db"]
+  default = ["admin","midtier","db"]
 }
 
 // variable "subnet_security_list_ids" {
