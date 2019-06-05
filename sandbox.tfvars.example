@@ -2,14 +2,18 @@ tenancy_ocid = ""
 user_ocid = ""
 fingerprint = "xx:xx:xx"
 private_key_path = "~/.oci/oci_api_key.pem"
+ssh_public_key
 region = "us-ashburn-1"
+shape = "VM.Standard2.1"
 
 oci_name = "sandbox"
+# Less than 15 characters
+vcn_label = "psft"
 
 compartment_description = "Playground for OCI Instances"
-group_description = "Sandbox Users"
-policy_description = "Sandbox Access for Users"
-policy_statements = ["Allow group sandbox to manage all-resources in compartment sandbox"]
+group_description = "Cloud Manager Users"
+policy_description = "Cloud Manager Access for Users"
+policy_statements = ["Allow group sandbox-admin to manage all-resources in compartment sandbox"]
 
 user_description = "Sandbox User"
 api_key_key_value = <<EOF

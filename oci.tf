@@ -1,5 +1,6 @@
 # Configure the Oracle Cloud Infrastructure provider with an API Key
 provider "oci" {
+  version          = ">= 3.27.0"
   tenancy_ocid = "${var.tenancy_ocid}"
   user_ocid = "${var.user_ocid}"
   fingerprint = "${var.fingerprint}"
@@ -22,12 +23,12 @@ resource "oci_identity_compartment" "sandbox_compartment" {
 # User Security
 resource "oci_identity_group" "sandbox_group" {
   compartment_id = "${var.tenancy_ocid}"
-  description = "${var.group_description}"
-  name = "${var.oci_name}"
+  description = "${var.group_description} Administrator"
+  name = "${var.oci_name}-admin"
 }
 
 resource "oci_identity_policy" "sandbox_policy" {
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
   description = "${var.policy_description}"
   name = "${var.oci_name}"
   statements = "${var.policy_statements}"

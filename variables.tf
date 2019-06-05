@@ -14,14 +14,14 @@ variable "private_key_path" {
   description = "Private Key Path"
 }
 
+variable "shape" {
+  description = "Sizing for the VM"
+  default     = "VM.Standard1.1"
+}
+
 variable "region"{
   default = "us-ashburn-1"
   description = "OCI Region"
-}
-
-variable "availability_domain" {
-  description = "Availablility Domain for the Region"
-  default = "pbfo:US-ASHBURN-AD-1"
 }
 
 variable "oci_name" {
@@ -49,6 +49,10 @@ variable "user_description" {
   description = "OCI User Description"
 }
 
+variable "ssh_public_key"{
+  description = "SSH Public Key value"
+}
+
 variable "api_key_key_value" {
   description = "API Public Key"
 }
@@ -64,9 +68,13 @@ variable "vcn_cidr_block" {
   default = "10.0.0.0/16"
 }
 
-variable "domain" {
-  description = "Domain Name"
+variable "vcn_label" {
+  description = "DNS Label for the VCN"
+  default = "psft"
 }
-// variable "subnet_security_list_ids" {
-//   description = "Default security lists for subnet"
-// }
+
+variable "dns_label" {
+  description = "Domain Name Label to use with oraclevcn.com"
+  type = "list"
+  default = ["admin","midtier","db"]
+}

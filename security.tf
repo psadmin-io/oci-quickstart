@@ -5,7 +5,7 @@ resource "oci_core_security_list" "sandbox_security_list" {
 
   egress_security_rules = [
     {
-      protocol    = "6"
+      protocol    = "all"
       destination = "0.0.0.0/0"
     }
   ]
@@ -160,6 +160,30 @@ resource "oci_core_security_list" "sandbox_nfs_security_list" {
       tcp_options = {
         min = "32803"
         max = "32803"
+      }
+    },{
+      protocol = "6"
+      source   = "10.0.0.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
+      }
+    },{
+      protocol = "6"
+      source   = "10.0.1.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
+      }
+    },{
+      protocol = "6"
+      source   = "10.0.2.0/24"
+
+      tcp_options = {
+        min = "445"
+        max = "445"
       }
     }
   ]
