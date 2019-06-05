@@ -20,9 +20,6 @@ resource "oci_core_instance" "cm_instance" {
     ssh_authorized_keys = "${var.ssh_public_key}"
   }
 
-  // timeouts {
-  //   create = "60m"
-  // }
 }
 
 output cloud_manager_public_ip {

@@ -2,9 +2,7 @@ resource "oci_core_vcn" "sandbox_vcn" {
   cidr_block = "${var.vcn_cidr_block}"
   display_name = "Sandbox Network"
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-  // default_route_table_id = "${oci_core_route_table.sandbox_route_table.id}"
   dns_label = "${var.vcn_label}"
-  # dns_label = "psft"
 }
 
 resource "oci_core_internet_gateway" "sandbox_internet_gateway" {
@@ -12,15 +10,6 @@ resource "oci_core_internet_gateway" "sandbox_internet_gateway" {
   display_name = "Sandbox Internet Gateway"
   vcn_id = "${oci_core_vcn.sandbox_vcn.id}"
 }
-
-// data "oci_core_route_tables" "sandbox_default_route_table" {
-//   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-//   vcn_id = "${oci_core_vcn.sandbox_vcn.id}"
-//   filter {
-//     name   = "name"
-//     values = ["Default"]
-//   }
-// }
 
 resource "oci_core_route_table" "sandbox_route_table" {
   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
@@ -52,8 +41,6 @@ resource "oci_core_dhcp_options" "sandbox_dhcp_options" {
 
 resource "oci_core_subnet" "sandbox_subnet" {
   count               = 3
-  // availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[count.index],"name")}"
-  # availability_domain = "${data.oci_identity_availability_domains.primary_availability_domains.availability_domains[0]}"
   cidr_block          = "10.0.${count.index}.0/24"
   display_name        = "${oci_core_vcn.sandbox_vcn.display_name} Subnet - ${element(var.dns_label, count.index)}"
   dns_label           = "${element(var.dns_label, count.index)}"
@@ -73,7 +60,3 @@ resource "oci_core_subnet" "sandbox_subnet" {
 output "sandbox_subnets" {
   value = "${oci_core_subnet.sandbox_subnet.*.id}"
 }
-
-// output "sandbox_default_route_table" {
-//   value  = "${data.oci_core_route_tables.sandbox_default_route_table.id}"
-// }

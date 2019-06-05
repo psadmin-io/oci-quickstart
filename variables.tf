@@ -24,11 +24,6 @@ variable "region"{
   description = "OCI Region"
 }
 
-// variable "availability_domain" {
-//   description = "Availablility Domain for the Region"
-//   default = "pbfo:US-ASHBURN-AD-1"
-// }
-
 variable "oci_name" {
   description = "Common name to use for OCI components"
 }
@@ -83,7 +78,3 @@ variable "dns_label" {
   type = "list"
   default = ["admin","midtier","db"]
 }
-
-// variable "subnet_security_list_ids" {
-//   description = "Default security lists for subnet"
-// }

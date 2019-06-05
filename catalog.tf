@@ -37,31 +37,6 @@ resource "oci_core_app_catalog_subscription" "cm_app_catalog_subscription" {
   }
 }
 
-// data "oci_core_app_catalog_subscriptions" "cm_app_catalog_subscriptions" {
-//   #Required
-//   compartment_id = "${oci_identity_compartment.sandbox_compartment.id}"
-
-//   #Optional
-//   listing_id = "${oci_core_app_catalog_subscription.cm_app_catalog_subscription.listing_id}"
-
-//   filter {
-//     name   = "listing_resource_version"
-//     values = ["${oci_core_app_catalog_subscription.cm_app_catalog_subscription.listing_resource_version}"]
-//   }
-// }
-
-# output subscriptions {
-#   value = ["${data.oci_core_app_catalog_subscriptions.cm_app_catalog_subscriptions.app_catalog_subscriptions}"]
-# }
-
-# output agreement_eula_link {
-#   value = ["${oci_core_app_catalog_listing_resource_version_agreement.cm_app_catalog_listing_resource_version_agreement.eula_link}"]
-# }
-
-# output catalog_listing {
-#    value = "${data.oci_core_app_catalog_listings.cm_app_catalog_listings.app_catalog_listings}"
-# }
-
 data "oci_core_app_catalog_listings" "cm_linux_image_listings" {
   filter {
     name = "display_name"
